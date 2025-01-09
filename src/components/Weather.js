@@ -28,6 +28,7 @@ const Weather = () => {
                 icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
             });
             setError("");
+            setQuery("");
         }else{
             setError("City not found. Please try again.");
             setWeather(null);
