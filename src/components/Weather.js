@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 const Weather = () => {
   const [query, setQuery] = useState('');
   const [weather, setWeather] = useState(null);
+  const [city, setCity] = useState(''); // New state to store the city name
   const [error, setError] = useState('');
-  const [cityName, setCityName] = useState(''); // New state to store displayed city name
 
   const apiKey = 'ebc1d22c0344b7746306b67843ceb451';
 
@@ -27,9 +27,9 @@ const Weather = () => {
           description: data.weather[0].description,
           icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
         });
+        setCity(query); // Save the city name separately
         setError('');
-        setCityName(query); // Update cityName for display
-        setQuery(''); // Clear input after successful search
+        setQuery(''); // Clear the search input after submission
       } else {
         setError('City not found. Please try again.');
         setWeather(null);
@@ -57,7 +57,7 @@ const Weather = () => {
 
       {weather && (
         <div className="weather" style={{ marginTop: '20px' }}>
-          <h2>Weather in {cityName}</h2>
+          <h2>Weather in {city}</h2> {/* Use `city` instead of `query` */}
           <img src={weather.icon} alt="Weather Icon" />
           <p>Temperature: {weather.temperature}°C</p>
           <p>Description: {weather.description}</p>
